@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <com.shoonie.ffsolitaire.GameView
+        android:id="@+id/gameDisplayView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"/>
+
+    <Button
+        android:id="@+id/newButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/button_string_new"
+        android:layout_toLeftOf="@+id/changeButton"
+        android:layout_alignParentBottom="true"/>
+
+    <Button
+        android:id="@+id/changeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/button_string_change"
+        android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="@+id/endButton"
+        />
+
+    <Button
+        android:id="@+id/endButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/button_string_end"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"/>
+
+
+</RelativeLayout>

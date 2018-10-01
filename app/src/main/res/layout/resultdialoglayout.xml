@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/textResultTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="@string/text_result"
+        android:layout_alignParentTop="true"
+        android:textSize="30sp" />
+
+    <ImageView
+        android:id="@+id/cardView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textResultTitle"
+        android:layout_marginTop="16dp"
+        android:layout_centerHorizontal="true"
+        app:srcCompat="@drawable/pic0101" />
+
+
+    <TextView
+        android:id="@+id/textResultAll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/cardView"
+        android:layout_marginTop="30dp"
+        android:layout_centerHorizontal="true"
+        android:text="@string/fortune01"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/prevbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/prev_buttonText"
+        android:layout_toLeftOf="@+id/nextbutton"
+        android:layout_alignParentBottom="true" />
+
+    <Button
+        android:id="@+id/nextbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/next_buttonText"
+        android:layout_toLeftOf="@+id/finishbutton"
+        android:layout_alignParentBottom="true" />
+
+    <Button
+        android:id="@+id/finishbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/finish_buttonText"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true" />
+</RelativeLayout>

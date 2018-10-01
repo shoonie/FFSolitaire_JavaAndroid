@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">FFSolitaire</string>
+    <string name="button_string_new">New</string>
+    <string name="button_string_change">Change</string>
+    <string name="button_string_end">End</string>
+    <string name="text_result">Result</string>
+    <string name="fortune00">No Fortune To Tell you.</string>
+    <string name="fortune01">News. There would be some good news today!</string>
+    <string name="fortune02">Lover. You could be meet a lover.</string>
+    <string name="fortune03">Picnic. You would go a picnic.</string>
+    <string name="fortune04">Annoying. Some annoying thing could be happened.</string>
+    <string name="fortune05">Noodles. You would have some noodles.</string>
+    <string name="fortune06">Joy. You would enjoy something</string>
+    <string name="fortune07">Windfall. You will meet unexpected fortune.</string>
+    <string name="fortune08">Money. You would spend some big money.</string>
+    <string name="fortune09">Alcohol. you have a chance to drink some beer</string>
+    <string name="fortune10">Worry. Winter is coming</string>
+    <string name="fortune11">Money. You would earn huge money.</string>
+    <string name="fortune12">Guest. There would be some guest.</string>
+    <string name="prev_buttonText">Prev</string>
+    <string name="next_buttonText">Next</string>
+    <string name="finish_buttonText">Finish</string>
+</resources>
