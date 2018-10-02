@@ -463,9 +463,9 @@ public class Play6By8 extends PlayGame {
                 if (m_aMainColumn[8].GetSize() == 12 &&
                         m_aMainColumn[9].GetSize() == 12 &&
                         m_aMainColumn[10].GetSize() == 12 &&
-                        m_aMainColumn[11].GetSize() == 12)
+                        m_aMainColumn[11].GetSize() == 12) {
                     break;
-
+                }
             }
         }
     }
