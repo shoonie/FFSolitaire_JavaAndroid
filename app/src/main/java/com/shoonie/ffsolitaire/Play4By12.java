@@ -2,39 +2,44 @@ package com.shoonie.ffsolitaire;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.Rect;
+import android.view.View;
+import	android.widget.Toast;
+import android.widget.Button;
 
 public class Play4By12 extends PlayGame {
         static int system_width = 0;
         static int system_height = 0;
-		private final int	START_X_1_4BY12					=	10;
-		private final int	START_Y_1_4BY12					=	10;
-		private final int	START_X_2_4BY12					=	10;
-		private final int	START_Y_2_4BY12					=	800;
-		private final int	INTERVAL_COLUMNTOCOLUMN_4BY12	=	230;
-		private final int	INTERVAL_YTOY_4BY12				=	60;
-		private final int	HIDDEN_STARTX_4BY12				=	10;
-		private final int	HIDDEN_STARTY_4BY12				=	1600;
-		private final int	CARD_CX							=	200;
-		private final int	CARD_CY							=	310;
+		private int START_X_1_4BY12 = 10;
+		private int START_Y_1_4BY12	= 10;
+		private int START_X_2_4BY12	= 10;
+		private int START_Y_2_4BY12 = 800;
+		private int INTERVAL_COLUMNTOCOLUMN_4BY12	= 230;
+		private int INTERVAL_YTOY_4BY12	 = 60;
+		private int HIDDEN_STARTX_4BY12	 = 10;
+		private int HIDDEN_STARTY_4BY12	 = 1600;
+		private int CARD_CX =	200;
+		private int CARD_CY=	310;
 		
-		private		int 	m_nStatus; // 0 normal 1 finish can't win 2 win the game.
-		private 	Context m_Context	=	null;
-		private 	Deck 	aDeck;
-		private		boolean	m_bAnyCardSelected;
-		private		int		m_nSelectedColumn;
-		FlowerCard			m_SelectedCard;		
-		CardColumn[]		m_aMainColumn	=	new CardColumn[12];
-		CardColumn			m_HiddenColumn;	
+		private int m_nStatus; // 0 normal 1 finish can't win 2 win the game.
+		private Context m_Context	=	null;
+		private Deck aDeck;
+		private boolean m_bAnyCardSelected;
+		private int m_nSelectedColumn;
+		FlowerCard 	m_SelectedCard;
+		CardColumn[] m_aMainColumn	=	new CardColumn[12];
+		CardColumn m_HiddenColumn;
 		
 		public Play4By12(Context context, int nWidth, int nHeight) {
             m_Context = context;
             system_width = nWidth;
             system_height = nHeight;
+
+			CalcDimension();
+
 			aDeck = new Deck(m_Context);
 			for(int i=0;i<12;i++){
 				m_aMainColumn[i] 	= 	new CardColumn(m_Context); 
@@ -44,7 +49,7 @@ public class Play4By12 extends PlayGame {
 			m_nSelectedColumn	=	-1;
 			m_SelectedCard		=	null;
 			m_bAnyCardSelected	=	false;
-		}	
+		}
 		
 		
 		public FlowerCard getCard(int index){
@@ -149,13 +154,13 @@ public class Play4By12 extends PlayGame {
 			}
 			if(m_nStatus ==1 )
 			{
-//				Bitmap endBitmap = BitmapFactory.decodeResource(m_Context.getResources(), R.drawable.game01);
-//				canvas.drawBitmap(endBitmap, 60,300, null);
+				Toast toast = Toast.makeText(m_Context,R.string.textCantwinTheGame, Toast.LENGTH_LONG);
+				toast.show();
 			}
 			else if(m_nStatus == 2)
 			{
-//				Bitmap endBitmap = BitmapFactory.decodeResource(m_Context.getResources(), R.drawable.game00);
-//				canvas.drawBitmap(endBitmap, 60,300, null);
+				Toast toast = Toast.makeText(m_Context,R.string.textWonTheGame, Toast.LENGTH_LONG);
+				toast.show();
 			}
 				
 		}
@@ -542,7 +547,35 @@ public class Play4By12 extends PlayGame {
 				m_HiddenColumn.PushCard(getCard(i));
 			return true;
 		}
+		private void CalcDimension() {
+			CARD_CX = system_width * 200 / 1440;
+			CARD_CY = CARD_CX * 310 / 200;
 
+			START_X_1_4BY12 = system_width * 10 / 1440;
+			START_Y_1_4BY12 = system_height * 10 / 2880;
+			START_X_2_4BY12 = START_X_1_4BY12;
+			START_Y_2_4BY12 = system_height * 900 / 2880;
+
+			INTERVAL_COLUMNTOCOLUMN_4BY12	= CARD_CX * 230/200;
+
+			INTERVAL_YTOY_4BY12	 = CARD_CY * 60/310;
+			HIDDEN_STARTX_4BY12	 = system_width * 10 / 1440;
+			HIDDEN_STARTY_4BY12	 = system_height*1800 / 2880;
+
+	/*
+		private int START_X_1_4BY12 = 10;
+		private int START_Y_1_4BY12	= 10;
+		private int START_X_2_4BY12	= 10;
+		private int START_Y_2_4BY12 = 800;
+		private int INTERVAL_COLUMNTOCOLUMN_4BY12	= 230;
+		private int INTERVAL_YTOY_4BY12	 = 60;
+		private int HIDDEN_STARTX_4BY12	 = 10;
+		private int HIDDEN_STARTY_4BY12	 = 1600;
+		private int CARD_CX =	200;
+		private int CARD_CY=	310;
+			this is for 1440*2880
+	*/
+		}
 	}
 
 

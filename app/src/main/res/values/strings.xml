@@ -20,4 +20,7 @@
     <string name="prev_buttonText">Prev</string>
     <string name="next_buttonText">Next</string>
     <string name="finish_buttonText">Finish</string>
+    <string name="textWonTheGame">You Won The Game!</string>
+    <string name="textCantwinTheGame">You can not win the game!</string>
+    <string name="button_string_auto">Auto</string>
 </resources>

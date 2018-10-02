@@ -19,6 +19,7 @@ public class GameView extends View {
     private int nSystemWidth = 0;
     private int nSystemHeight = 0;
     long 	nTime	=	0;
+
     Deck aDeck;
 
     public GameView(Context context) {
@@ -183,5 +184,16 @@ public class GameView extends View {
         aDlg.setCancelable(true);
         aDlg.setTitle("Today's Fortune");
         aDlg.show();
+    }
+    public void InvalidateAllView()
+    {
+        invalidate();
+    }
+    public void autoComplete()
+    {
+        if(gameType == 2)
+        {
+            aGame.autoComplete();
+        }
     }
 }

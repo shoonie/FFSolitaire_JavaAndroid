@@ -13,6 +13,14 @@
         android:orientation="vertical"/>
 
     <Button
+        android:id="@+id/autoButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/button_string_auto"
+        android:layout_toLeftOf="@+id/newButton"
+        android:layout_alignParentBottom="true" />
+
+    <Button
         android:id="@+id/newButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -36,6 +44,5 @@
         android:text="@string/button_string_end"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"/>
-
 
 </RelativeLayout>

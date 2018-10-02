@@ -6,7 +6,9 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.Rect;
-import android.util.DisplayMetrics;
+import android.view.View;
+import	android.widget.Toast;
+import android.widget.Button;
 
 
 public class PlayFortune extends PlayGame {
@@ -52,7 +54,7 @@ public class PlayFortune extends PlayGame {
     int nResultCount = 0;
     int[] nResultCards = new int[12];
     int nResultIndex = 0;
-
+    Button aAutoButton;
     public int getResultCount() {
         return nResultCount;
     }
@@ -657,7 +659,7 @@ public class PlayFortune extends PlayGame {
 
         return true;
     }
-    public void CalcDimension()
+    private void CalcDimension()
     {
         CARD_CX = system_width * 230 / 1440;
         CARD_CY = CARD_CX *239 /154;

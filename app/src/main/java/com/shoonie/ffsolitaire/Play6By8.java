@@ -6,6 +6,9 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.Rect;
+import android.widget.Toast;
+import android.content.Intent;
+
 
 public class Play6By8 extends PlayGame {
     static int system_width = 0;
@@ -37,10 +40,12 @@ public class Play6By8 extends PlayGame {
     boolean m_bWinthegame;
     boolean m_bAutoComplete;
 
+
     public Play6By8(Context context, int nWidth, int nHeight) {
         m_Context = context;
         system_width = nWidth;
         system_height = nHeight;
+        CalcDimension();
         aDeck = new Deck(m_Context);
         for (int i = 0; i < 12; i++) {
             m_aMainColumn[i] = new CardColumn(m_Context);
@@ -295,6 +300,12 @@ public class Play6By8 extends PlayGame {
             nRedraw = 3;
         }
         SetMouseRegion();
+        if (m_bAutoComplete == true) {
+            Intent intent = new Intent();
+            intent.setAction(MainActivity.REFRESH_ACTIVITY);
+
+            m_Context.sendBroadcast(intent);
+        }
         return nRedraw;
     }
 
@@ -359,13 +370,10 @@ public class Play6By8 extends PlayGame {
                 canvas.drawBitmap(bufBitmap, null, drawRect, aPaint);
             }
         }
-        if (m_bAutoComplete == true) {
-//			Bitmap autoBitmap = BitmapFactory.decodeResource(m_Context.getResources(), R.drawable.auto);
-//			canvas.drawBitmap(autoBitmap, 60,300, null);
-        }
+
         if (m_bWinthegame == true) {
-//			Bitmap endBitmap = BitmapFactory.decodeResource(m_Context.getResources(), R.drawable.game00);
-//			canvas.drawBitmap(endBitmap, 60,300, null);
+            Toast toast = Toast.makeText(m_Context,R.string.textWonTheGame, Toast.LENGTH_LONG);
+            toast.show();
         }
         if (m_bShowInfo == true) {
 //			Bitmap infoBitmap = BitmapFactory.decodeResource(m_Context.getResources(), R.drawable.info);
@@ -378,7 +386,7 @@ public class Play6By8 extends PlayGame {
             m_bShowInfo = !m_bShowInfo;
             return true;
         } else if ((pt.y > 260 && pt.y < 360) && m_bAutoComplete == true && m_bWinthegame == false) {
-            AutoComplete();
+            autoComplete();
             m_bAutoComplete = false;
             m_bWinthegame = true;
             return false;
@@ -403,7 +411,7 @@ public class Play6By8 extends PlayGame {
         return checkRet;
     }
 
-    public void AutoComplete() {
+    public void autoComplete() {
         AutoCompleteThread aThread = new AutoCompleteThread();
         Thread myThread = new Thread(aThread);
         myThread.start();
@@ -446,7 +454,9 @@ public class Play6By8 extends PlayGame {
                         }
                     }
 
-//					((m_Context)).invalidateGameView();
+                    Intent intent = new Intent();
+                    intent.setAction(MainActivity.AutoComplete_ACTIVITY);
+                    m_Context.sendBroadcast(intent);
                     Sleep(50);
                 }
 
@@ -468,5 +478,36 @@ public class Play6By8 extends PlayGame {
         }
 
     }
+    private void CalcDimension() {
+        CARD_CX = system_width * 154 / 1440;
+        CARD_CY = CARD_CX * 239 / 154;
 
+        START_X_1_8BY6 = system_width * 500/1440;
+        START_Y_1_8BY6 = system_height * 60/2880;
+        START_X_2_8BY6 = system_width * 820/1440;
+        START_Y_2_8BY6 = START_Y_1_8BY6;
+
+        INTERVAL_XTOX_8BY6 = CARD_CX * 40/154;
+        INTERVAL_YTOY_8BY6 = CARD_CY * 270/239;
+
+        START_SOLVE_X_8BY6 = system_width * 660/1440;
+        START_SOLVE_Y_8BY6 = START_Y_1_8BY6;
+
+	/*
+        private int START_X_1_8BY6 = 500;
+        private int START_Y_1_8BY6 = 60;
+        private int START_X_2_8BY6 = 820;
+        private int START_Y_2_8BY6 = 60;
+
+        private int INTERVAL_XTOX_8BY6 = 40;
+        private int INTERVAL_YTOY_8BY6 = 270;
+
+        private int START_SOLVE_X_8BY6 = 660;
+        private int START_SOLVE_Y_8BY6 = 60;
+
+        private int CARD_CX = 154;
+        private int CARD_CY = 239;
+			this is for 1440*2880
+	*/
+    }
 }

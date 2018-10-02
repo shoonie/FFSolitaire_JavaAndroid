@@ -18,4 +18,5 @@ public abstract class PlayGame {
 		public abstract boolean	SetMouseRegion();
 		public abstract boolean	ShuffleAndInit();
 		public abstract int		CheckPoint(Point pt, Rect rt1, Rect rt2);
+		public void autoComplete(){}
 }
