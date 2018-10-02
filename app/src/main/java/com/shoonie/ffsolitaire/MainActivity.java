@@ -89,8 +89,11 @@ public class MainActivity extends AppCompatActivity {
                 gameView.newGame();
             else if(v.equals(changeButton))
                 gameView.changeGame();
-            else if(v.equals(autoButton))
+            else if(v.equals(autoButton)) {
                 gameView.autoComplete();
+                autoButton.setEnabled(false);
+                autoButton.setVisibility(View.INVISIBLE);
+            }
         }
     }
 }

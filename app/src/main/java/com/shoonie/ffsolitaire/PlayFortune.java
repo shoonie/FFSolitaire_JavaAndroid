@@ -219,15 +219,21 @@ public class PlayFortune extends PlayGame {
                     if (nNewSelectedColumnNumber != selectedColumn) {
                         //compare with it ...
                         int nOldSelectedNumber = selectedCard.GetNumber();
+                        int nOldSelectedPosition = selectedCard.GetPosition();
                         int nNewSelectedNumber = 0;
+                        int nNewSelectedPosition = 0;
                         if (i < 4 && mainColumn[i].ShowLastCard() != null) {
                             nNewSelectedNumber = mainColumn[i].ShowLastCard().GetNumber();
-                        } else if (i == 4 && aBoardColumn.ShowFirstCard() != null)
+                            nNewSelectedPosition = mainColumn[i].ShowLastCard().GetPosition();
+                        } else if (i == 4 && aBoardColumn.ShowFirstCard() != null){
                             nNewSelectedNumber = aBoardColumn.ShowFirstCard().GetNumber();
-                        else if (i == 5 && aBoardColumn.ShowLastCard() != null)
+                            nNewSelectedPosition = aBoardColumn.ShowFirstCard().GetPosition();
+                        }
+                        else if (i == 5 && aBoardColumn.ShowLastCard() != null) {
                             nNewSelectedNumber = aBoardColumn.ShowLastCard().GetNumber();
-
-                        if (nOldSelectedNumber == nNewSelectedNumber) {
+                            nNewSelectedPosition = aBoardColumn.ShowLastCard().GetPosition();
+                        }
+                        if (nOldSelectedNumber == nNewSelectedNumber && nOldSelectedPosition != nNewSelectedPosition) {
                             ////////
                             String s = String.format("%d - %d Good Job!!!\n",
                                     nOldSelectedNumber,
@@ -447,105 +453,6 @@ public class PlayFortune extends PlayGame {
 
     }
 
-    /*
-        public void makeResultForm()
-        {
-
-            resultFrame  		= 	new JFrame("FF Solitare Result- by Shoonie");
-            JPanel 		buttonPanel		=	new JPanel();
-            JPanel		labelPanel		=	new JPanel();
-            MyResultPanel	imagePanel	=	new MyResultPanel();
-
-            next 	= new JButton("next");
-            before 	= new JButton("before");
-            finish 	= new JButton("finish");
-
-            meaning	=	new JTextArea(15,15);
-            meaning.setEnabled(false);
-            if(nResultCount > 1)
-                meaning.setText(GetFortune(nResultCards[nResultIndex]));
-            else
-                meaning.setText(GetFortune(-1));
-
-            labelPanel.add(meaning);
-            if(nResultCount > 1)
-            {
-                buttonPanel.add(before);
-                buttonPanel.add(next);
-                before.setEnabled(false);
-                before.addActionListener(new BeforeButtonEvent());
-                next.addActionListener(new NextButtonEvent());
-            }
-            buttonPanel.add(finish);
-            finish.addActionListener(new FinishButtonEvent());
-            resultFrame.getContentPane().add(BorderLayout.CENTER,imagePanel);
-            resultFrame.getContentPane().add(BorderLayout.SOUTH,buttonPanel);
-            resultFrame.getContentPane().add(BorderLayout.EAST,labelPanel);
-
-            resultFrame.setSize(320,240);
-            resultFrame.setVisible(true);
-
-        }
-
-        public class BeforeButtonEvent implements ActionListener{
-            public void actionPerformed(ActionEvent ev)
-            {
-                if(nResultIndex == 0)
-                {
-                    nResultIndex =0;
-                }
-                else
-                {
-                    nResultIndex --;
-                    if(nResultIndex == 0)
-                        before.setEnabled(false);
-                    else
-                        before.setEnabled(true);
-                    next.setEnabled(true);
-                }
-                meaning.setText(GetFortune(nResultCards[nResultIndex]));
-                resultFrame.repaint();
-            }
-        }
-        public class NextButtonEvent implements ActionListener{
-            public void actionPerformed(ActionEvent ev)
-            {
-                if(nResultIndex == nResultCount-1)
-                {
-                    nResultIndex =nResultCount-1;
-                }
-                else
-                {
-                    nResultIndex ++;
-                    if(nResultIndex == nResultCount-1)
-                        next.setEnabled(false);
-                    else
-                        next.setEnabled(true);
-                    before.setEnabled(true);
-                }
-                meaning.setText(GetFortune(nResultCards[nResultIndex]));
-                resultFrame.repaint();
-            }
-        }
-        public class FinishButtonEvent implements ActionListener{
-            public void actionPerformed(ActionEvent ev)
-            {
-                resultFrame.setVisible(false);
-            }
-        }
-
-
-        public class MyResultPanel extends JPanel
-        {
-            public void paintComponent(Graphics g)
-            {
-                FlowerCard aCard = new FlowerCard((nResultCards[nResultIndex]-1) * 4);
-                Image tempImage = aCard.GetImage();
-                System.out.println("Draw Something!!!!!!!!!!!!!!!!!!!!!");
-                g.drawImage(tempImage, 24, 24, null);
-            }
-        }
-    */
     public void DrawAll(Canvas canvas) {
         int i, j;
         Bitmap bitmap;
@@ -574,10 +481,20 @@ public class PlayFortune extends PlayGame {
             canvas.drawBitmap(bitmap, null, dstRect, null);
         }
         ///////////////////////////////////////////////////////////////////
-//		Draw	Board Set.
-        for (i = 0; i < aBoardColumn.GetSize(); i++) {
+        //		Draw	Board Set
+        int nBoardSize = aBoardColumn.GetSize();
+
+        for (i = 0; i < nBoardSize; i++) {
             bitmap = (aBoardColumn.GetBitmapOfCard(i));
-            Rect dstRect = new Rect(BOARD_STARTX_FORTUNE + BOARD_INTERVAL_FORTUNE * i, BOARD_STARTY_FORTUNE, BOARD_STARTX_FORTUNE + BOARD_INTERVAL_FORTUNE * i + CARD_CX, BOARD_STARTY_FORTUNE + CARD_CY);
+            Rect dstRect;
+            if( i>= 1) {
+                if (i == nBoardSize - 1)
+                    dstRect = new Rect(BOARD_STARTX_FORTUNE + BOARD_INTERVAL_FORTUNE * i + CARD_CX, BOARD_STARTY_FORTUNE, BOARD_STARTX_FORTUNE + BOARD_INTERVAL_FORTUNE * i + CARD_CX * 2, BOARD_STARTY_FORTUNE + CARD_CY);
+                else
+                    dstRect = new Rect(BOARD_STARTX_FORTUNE + BOARD_INTERVAL_FORTUNE * i + CARD_CX/2, BOARD_STARTY_FORTUNE, BOARD_STARTX_FORTUNE + BOARD_INTERVAL_FORTUNE * i + CARD_CX/2 + CARD_CX , BOARD_STARTY_FORTUNE + CARD_CY);
+            }
+            else // only one card is opened
+                dstRect = new Rect(BOARD_STARTX_FORTUNE  , BOARD_STARTY_FORTUNE, BOARD_STARTX_FORTUNE +  CARD_CX , BOARD_STARTY_FORTUNE + CARD_CY);
             canvas.drawBitmap(bitmap, null, dstRect, null);
         }
         ///////////////////////////////////////////////////////////////
@@ -589,17 +506,25 @@ public class PlayFortune extends PlayGame {
                 Rect dstRect = new Rect(START_X_FORTUNE + INTERVAL_COLUMNTOCOLUMN_FORTUNE * selectedColumn, (mainColumn[selectedColumn].GetSize() - 1) * INTERVAL_YTOY_FORTUNE + START_Y_FORTUNE,
                         START_X_FORTUNE + INTERVAL_COLUMNTOCOLUMN_FORTUNE * selectedColumn + CARD_CX, (mainColumn[selectedColumn].GetSize() - 1) * INTERVAL_YTOY_FORTUNE + CARD_CY + START_Y_FORTUNE);
                 canvas.drawBitmap(bufBitmap, null, dstRect, aPaint);
-            } else if (selectedColumn == 4) {
-                if (aBoardColumn.GetSize() == 1) {
-                    Rect dstRect = new Rect(BOARD_STARTX_FORTUNE, BOARD_STARTY_FORTUNE, BOARD_STARTX_FORTUNE + CARD_CX, BOARD_STARTY_FORTUNE + CARD_CY);
+            }
+            else if (selectedColumn == 4)
+            {
+                if (aBoardColumn.GetSize() >= 3) {
+                    Rect dstRect = new Rect(BOARD_STARTX_FORTUNE, BOARD_STARTY_FORTUNE, BOARD_STARTX_FORTUNE + BOARD_INTERVAL_FORTUNE  + CARD_CX/2, BOARD_STARTY_FORTUNE + CARD_CY);
                     canvas.drawBitmap(bufBitmap, null, dstRect, aPaint);
                 } else {
-                    Rect dstRect = new Rect(BOARD_STARTX_FORTUNE, BOARD_STARTY_FORTUNE, BOARD_STARTX_FORTUNE + BOARD_INTERVAL_FORTUNE, BOARD_STARTY_FORTUNE + CARD_CY);
+                    Rect dstRect = new Rect(BOARD_STARTX_FORTUNE, BOARD_STARTY_FORTUNE, BOARD_STARTX_FORTUNE + CARD_CX, BOARD_STARTY_FORTUNE + CARD_CY);
                     canvas.drawBitmap(bufBitmap, null, dstRect, aPaint);
                 }
             } else if (selectedColumn == 5) {
-                Rect dstRect = new Rect(BOARD_STARTX_FORTUNE + BOARD_INTERVAL_FORTUNE * (aBoardColumn.GetSize() - 1), BOARD_STARTY_FORTUNE, BOARD_STARTX_FORTUNE + BOARD_INTERVAL_FORTUNE * (aBoardColumn.GetSize() - 1) + CARD_CX, BOARD_STARTY_FORTUNE + CARD_CY);
-                canvas.drawBitmap(bufBitmap, null, dstRect, aPaint);
+                if (aBoardColumn.GetSize() == 1) {
+                    Rect dstRect = new Rect(BOARD_STARTX_FORTUNE, BOARD_STARTY_FORTUNE, BOARD_STARTX_FORTUNE + CARD_CX, BOARD_STARTY_FORTUNE + CARD_CY);
+                    canvas.drawBitmap(bufBitmap, null, dstRect, aPaint);
+                }
+                else {
+                    Rect dstRect = new Rect(BOARD_STARTX_FORTUNE + BOARD_INTERVAL_FORTUNE * (aBoardColumn.GetSize() - 1) + CARD_CX, BOARD_STARTY_FORTUNE, BOARD_STARTX_FORTUNE + BOARD_INTERVAL_FORTUNE * (aBoardColumn.GetSize() - 1) + CARD_CX * 2, BOARD_STARTY_FORTUNE + CARD_CY);
+                    canvas.drawBitmap(bufBitmap, null, dstRect, aPaint);
+                }
             }
 
         }
@@ -620,19 +545,13 @@ public class PlayFortune extends PlayGame {
             aBoardColumn.SetLastRect(BOARD_STARTX_FORTUNE, BOARD_STARTY_FORTUNE, CARD_CX, CARD_CY);
 
         if (aBoardColumn.GetSize() > 1) {
-            aBoardColumn.SetFirstRect(BOARD_STARTX_FORTUNE, BOARD_STARTY_FORTUNE, BOARD_INTERVAL_FORTUNE, CARD_CY);
-            aBoardColumn.SetLastRect(BOARD_STARTX_FORTUNE + BOARD_INTERVAL_FORTUNE * (aBoardColumn.GetSize() - 1),
-                    BOARD_STARTY_FORTUNE, CARD_CX, CARD_CY);
+            aBoardColumn.SetFirstRect(BOARD_STARTX_FORTUNE, BOARD_STARTY_FORTUNE, BOARD_INTERVAL_FORTUNE + CARD_CX/2, CARD_CY);
+            aBoardColumn.SetLastRect(BOARD_STARTX_FORTUNE + BOARD_INTERVAL_FORTUNE * (aBoardColumn.GetSize() - 1) + CARD_CX, BOARD_STARTY_FORTUNE, CARD_CX, CARD_CY);
 
-            if (anyCardSelected &&
-                    aBoardColumn.GetSize() >= 3 &&
-                    (selectedCard == aBoardColumn.ShowLastCard())
-                    ) {
-                aBoardColumn.SetLastBeforeRect(
-                        BOARD_STARTX_FORTUNE + BOARD_INTERVAL_FORTUNE * (aBoardColumn.GetSize() - 2),
-                        BOARD_STARTY_FORTUNE,
-                        BOARD_INTERVAL_FORTUNE,
-                        CARD_CY);
+            if (anyCardSelected && aBoardColumn.GetSize() >= 3 && (selectedCard == aBoardColumn.ShowLastCard()))
+            {
+                int xSize =  + BOARD_INTERVAL_FORTUNE * (aBoardColumn.GetSize() + 1) + CARD_CX /2;
+                aBoardColumn.SetLastBeforeRect(BOARD_STARTX_FORTUNE + BOARD_INTERVAL_FORTUNE * (aBoardColumn.GetSize() - 2) + CARD_CX/2,   BOARD_STARTY_FORTUNE,  xSize, CARD_CY);
             }
         }
         return bRet;
@@ -675,7 +594,7 @@ public class PlayFortune extends PlayGame {
 
         BOARD_STARTX_FORTUNE = system_width * 250 / 1440;
         BOARD_STARTY_FORTUNE = HIDDEN_STARTY_FORTUNE;
-        BOARD_INTERVAL_FORTUNE = CARD_CX *45 /230;
+        BOARD_INTERVAL_FORTUNE = CARD_CX * 25 /230;
 
         CARD_CX_BOARD_LEFT = CARD_CX *10 /230;
 
