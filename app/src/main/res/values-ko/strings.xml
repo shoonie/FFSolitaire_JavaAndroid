@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">화투솔리테어</string>
+    <string name="button_string_new">새게임</string>
+    <string name="button_string_change">다른게임</string>
+    <string name="button_string_end">숨기기</string>
+    <string name="text_result">결과</string>
+    <string name="fortune00">떨어진 운이 없습니다.</string>
+    <string name="fortune01">소식</string>
+    <string name="fortune02">님, 연인</string>
+    <string name="fortune03">나들이</string>
+    <string name="fortune04">스트레스 받는일, 히야까시, 뭐 좋은 번역 없나요?></string>
+    <string name="fortune05">국수</string>
+    <string name="fortune06">기쁨</string>
+    <string name="fortune07">홍재</string>
+    <string name="fortune08">돈쓸일</string>
+    <string name="fortune09">술</string>
+    <string name="fortune10">근심</string>
+    <string name="fortune11">돈생길일</string>
+    <string name="fortune12">손님</string>
+    <string name="prev_buttonText">이전</string>
+    <string name="next_buttonText">다음</string>
+    <string name="finish_buttonText">종료</string>
+    <string name="textWonTheGame">축하합니다. 완료했습니다.</string>
+    <string name="textCantwinTheGame">붙었습니다.새게임을 실행하세요.</string>
+    <string name="button_string_auto">자동완료</string>
+</resources>
