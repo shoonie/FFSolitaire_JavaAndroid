@@ -67,9 +67,9 @@ public class PlayFortune extends PlayGame {
         return aDeck.GetAt(index);
     }
 
-    public PlayFortune(Context context, int nWidth, int nHeight) {
+    public PlayFortune(Context context, int nWidth, int nHeight, Deck deck) {
         m_Context = context;
-        aDeck = new Deck(m_Context);
+        aDeck = deck;
         anyCardSelected = false;
         selectedColumn = -1;
         nCountSolve = 0;
