@@ -6,8 +6,8 @@ android {
         applicationId "com.shoonie.ffsolitaire"
         minSdkVersion 15
         targetSdkVersion 28
-        versionCode 4
-        versionName "1.3"
+        versionCode 2
+        versionName "1.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

@@ -19,6 +19,7 @@ public class GameView extends View {
     private int nSystemWidth = 0;
     private int nSystemHeight = 0;
     long 	nTime	=	0;
+
     Deck aDeck;
 
     public GameView(Context context) {
@@ -28,8 +29,8 @@ public class GameView extends View {
         m_Context4View = context;
         gameType =	0;
         GetSystemResolution();
-        aDeck = new Deck(m_Context4View);
-        aGame = new PlayFortune(m_Context4View,nSystemWidth,nSystemHeight,aDeck);
+
+        aGame = new PlayFortune(m_Context4View,nSystemWidth,nSystemHeight);
         aGame.ShuffleAndInit();
         aGame.SetMouseRegion();
     }
@@ -43,8 +44,8 @@ public class GameView extends View {
         gameType		=	0;
 
         GetSystemResolution();
-        aDeck = new Deck(m_Context4View);
-        aGame = new PlayFortune(m_Context4View,nSystemWidth,nSystemHeight,aDeck);
+
+        aGame = new PlayFortune(m_Context4View,nSystemWidth,nSystemHeight);
         aGame.ShuffleAndInit();
         aGame.SetMouseRegion();
     }
@@ -58,8 +59,8 @@ public class GameView extends View {
         gameType		=	0;
 
         GetSystemResolution();
-        aDeck = new Deck(m_Context4View);
-        aGame = new PlayFortune(m_Context4View,nSystemWidth,nSystemHeight,aDeck);
+
+        aGame = new PlayFortune(m_Context4View,nSystemWidth,nSystemHeight);
         aGame.ShuffleAndInit();
         aGame.SetMouseRegion();
     }
@@ -81,13 +82,13 @@ public class GameView extends View {
         switch(gameType)
         {
             case 0:
-                aGame 	= 	new PlayFortune(m_Context4View,nSystemWidth,nSystemHeight,aDeck);
+                aGame 	= 	new PlayFortune(m_Context4View,nSystemWidth,nSystemHeight);
                 break;
             case 1:
-                aGame 	= 	new Play4By12(m_Context4View,nSystemWidth,nSystemHeight,aDeck);
+                aGame 	= 	new Play4By12(m_Context4View,nSystemWidth,nSystemHeight);
                 break;
             case 2:
-                aGame 	= 	new Play6By8(m_Context4View,nSystemWidth,nSystemHeight,aDeck);
+                aGame 	= 	new Play6By8(m_Context4View,nSystemWidth,nSystemHeight);
                 break;
         }
         aGame.ShuffleAndInit();
@@ -110,13 +111,13 @@ public class GameView extends View {
                 switch(gameType)
                 {
                     case 0:
-                        aGame 	= 	new PlayFortune(m_Context4View,nSystemWidth,nSystemHeight,aDeck);
+                        aGame 	= 	new PlayFortune(m_Context4View,nSystemWidth,nSystemHeight);
                         break;
                     case 1:
-                        aGame 	= 	new Play4By12(m_Context4View,nSystemWidth,nSystemHeight,aDeck);
+                        aGame 	= 	new Play4By12(m_Context4View,nSystemWidth,nSystemHeight);
                         break;
                     case 2:
-                        aGame 	= 	new Play6By8(m_Context4View,nSystemWidth,nSystemHeight,aDeck);
+                        aGame 	= 	new Play6By8(m_Context4View,nSystemWidth,nSystemHeight);
                         break;
                 }
                 aGame.ShuffleAndInit();

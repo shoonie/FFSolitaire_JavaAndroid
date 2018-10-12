@@ -33,14 +33,14 @@ public class Play4By12 extends PlayGame {
 		CardColumn[] m_aMainColumn	=	new CardColumn[12];
 		CardColumn m_HiddenColumn;
 		
-		public Play4By12(Context context, int nWidth, int nHeight,Deck deck) {
+		public Play4By12(Context context, int nWidth, int nHeight) {
             m_Context = context;
             system_width = nWidth;
             system_height = nHeight;
 
 			CalcDimension();
 
-			aDeck = deck;
+			aDeck = new Deck(m_Context);
 			for(int i=0;i<12;i++){
 				m_aMainColumn[i] 	= 	new CardColumn(m_Context); 
 			}
