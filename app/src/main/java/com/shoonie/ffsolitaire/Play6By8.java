@@ -41,12 +41,12 @@ public class Play6By8 extends PlayGame {
     boolean m_bAutoComplete;
 
 
-    public Play6By8(Context context, int nWidth, int nHeight) {
+    public Play6By8(Context context, int nWidth, int nHeight,Deck deck) {
         m_Context = context;
         system_width = nWidth;
         system_height = nHeight;
         CalcDimension();
-        aDeck = new Deck(m_Context);
+        aDeck = deck;
         for (int i = 0; i < 12; i++) {
             m_aMainColumn[i] = new CardColumn(m_Context);
         }
